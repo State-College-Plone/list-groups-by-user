@@ -1,0 +1,12 @@
+from Products.CMFCore.utils import getToolByName
+
+groups_tool = getToolByName(context, 'portal_groups')
+
+for member in context.portal_membership.listMembers():
+    username = member.getProperty("fullname")
+    userid = member.getId()
+    group = groups_tool.getGroupsByUserId(userid)
+    groupnames = [ x.getId() for x in group ]
+
+    print "%s, %s, %s" % (userid, username, groupnames)
+return printed
